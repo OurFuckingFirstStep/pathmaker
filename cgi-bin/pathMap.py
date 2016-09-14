@@ -28,14 +28,12 @@ class PathMap(object):
         paths = doc.xpath('//svg:path', namespaces=nsmap)
         for path in paths:
             id1, id2 = path.get('id').split('and')
-            if id1 in graph:
-                graph[id1].add(id2)
-            else:
-                graph[id1] = set(id2)
-            if id2 in graph:
-                graph[id2].add(id1)
-            else:
-                graph[id2] = set(id1)
+            if id1 not in graph:
+                graph[id1] = set()
+            graph[id1].add(id2)
+            if id2 not in graph:
+                graph[id2] = set()
+            graph[id2].add(id1)
             path.set('visibility', 'hidden')
         self.graph = graph.copy()
 
@@ -95,8 +93,7 @@ class PathMap(object):
         else:
             return etree.tostring(doc)
 
-
-"""if __name__ == "__main__":
+if __name__ == "__main__":
     path = PathMap("image.svg")
     path.create_path(1, 7, "image_path_17.svg")
     path.create_path(3, 7, "image_path_37.svg")
@@ -107,5 +104,4 @@ class PathMap(object):
     path.create_path("6", "4", "image_path_64.svg")
     byte_string = path.create_path("6", "4")
     with open("image_path_64.svg", 'wb') as pf:
-        pf.write(byte_string)"""
-
+        pf.write(byte_string)
