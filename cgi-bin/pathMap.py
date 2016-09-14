@@ -15,6 +15,14 @@ nsmap = {
 }
 
 
+class UnknownVertex(Exception):
+    pass
+
+
+class NoPath(Exception):
+    pass
+
+
 class PathMap(object):
     """
     В .svg файле все пути имеют тег <path> и id="2and5",
@@ -68,7 +76,14 @@ class PathMap(object):
         if id1 == id2:
             return
 
+        if id1 not in self.graph:
+            raise UnknownVertex
+        if id2 not in self.graph:
+            raise UnknownVertex
+
         paths = _deep_search(id1, id2, [id1])
+        if paths == []:
+            raise NoPath
         path = min(paths, key=len)
         doc = copy.deepcopy(self.doc)
 
