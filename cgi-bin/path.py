@@ -46,9 +46,11 @@ def print_html():
 
     try:
         A, B = get_points()
-        print ('From:', A, '<br>')
-        print ('To:', B, '<br>')
-    
+        print(r'<form action = "path.py" method=GET>')
+        print ('From: <input type="text" name="from" value=', A, '><br>')
+        print ('To: <input type="text" name="to" value=', B, '><br>')
+        print (r'<input type="submit" value="MAKE PATH"></form>')
+        print("</form>")
         name = RESULT_SVG_PREFIX + str(A) + str(B) + '.svg'
         path = PathMap(PATH_TO_SVG + BASE_SVG_NAME)
         path.create_path(A, B, PATH_TO_SVG + name)
