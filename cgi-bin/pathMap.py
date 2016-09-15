@@ -74,7 +74,7 @@ class PathMap(object):
         if isinstance(id2, int):
             id2 = str(id2)
         if id1 == id2:
-            return
+            raise NoPath
 
         if id1 not in self.graph:
             raise UnknownVertex
