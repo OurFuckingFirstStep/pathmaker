@@ -18,7 +18,7 @@ class BadInputFormat(Exception):
 
 def get_points():
     form = cgi.FieldStorage()
-    
+
     if 'from' not in form or 'to' not in form:
         raise BadInputFormat
 #        A, B = 1, 2
@@ -62,7 +62,7 @@ def print_html():
         print (r'<p>Bad input format!</p>')
     except (NoPath, UnknownVertex):
         print (r"<p>Can't build path between points", A, 'and', B,"</p>")
-    
+
 def main():
     print_headers()
     print_html()
