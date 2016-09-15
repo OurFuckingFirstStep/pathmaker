@@ -9,6 +9,6 @@ else
     if [[ $file_not_cgi_bin != "" ]]; then
         cp $file_not_cgi_bin -r /var/www/html/
     fi
-    chmod 766 /var/www/html/
+    chmod 777 /var/www/html/
     chmod 766 /var/www/html/*
 fi
